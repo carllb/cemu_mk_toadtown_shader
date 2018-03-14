@@ -14,8 +14,8 @@ layout(location = 6) out vec4 passPixelColor6;
 layout(location = 7) out vec4 passPixelColor7;
 uniform vec2 uf_fragCoordScale;
 
-vec4 ivec4ToVec4(ivec4 in){
-	return vec4(intBitsToFloat(in.x),intBitsToFloat(in.y),intBitsToFloat(in.z),intBitsToFloat(in.w));
+vec4 ivec4ToVec4(ivec4 invec){
+	return vec4(intBitsToFloat(invec.x),intBitsToFloat(invec.y),intBitsToFloat(invec.z),intBitsToFloat(invec.w));
 }
 
 
