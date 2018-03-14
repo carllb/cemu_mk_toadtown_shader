@@ -13,6 +13,12 @@ layout(location = 5) out vec4 passPixelColor5;
 layout(location = 6) out vec4 passPixelColor6;
 layout(location = 7) out vec4 passPixelColor7;
 uniform vec2 uf_fragCoordScale;
+
+vec4 ivec4ToVec4(ivec4 in){
+	return vec4(intBitsToFloat(in.x),intBitsToFloat(in.y),intBitsToFloat(in.z),intBitsToFloat(in.w));
+}
+
+
 int clampFI32(int v)
 {
 if( v == 0x7FFFFFFF )
@@ -2791,13 +2797,18 @@ R7i.w = R38i.w;
 // export
 ivec4 m_color = uf_uniformRegisterPS[0];
 passPixelColor0 = vec4(intBitsToFloat(m_color.x),intBitsToFloat(m_color.y),intBitsToFloat(m_color.z),intBitsToFloat(m_color.w));
-passPixelColor1 = vec4( 0.0, 1, 0.0, 1.0 );
-passPixelColor2 = vec4( 0, 0, 1.0, 1.0 );
-passPixelColor3 = vec4( 1.0, 1.0, 0.0, 1.0 );
-passPixelColor4 = vec4( 0.0, 1.0, 1.0, 1.0 );
-passPixelColor5 = vec4( 1.0, 0, 1.0, 1.0 );
+//passPixelColor1 = vec4( 0.0, 1, 0.0, 1.0 );
+passPixelColor1 = ivec4ToVec4(uf_uniformRegisterPS[1]);
+//passPixelColor2 = vec4( 0, 0, 1.0, 1.0 );
+passPixelColor2 = ivec4ToVec4(uf_uniformRegisterPS[2]);
+//passPixelColor3 = vec4( 1.0, 1.0, 0.0, 1.0 );
+passPixelColor3 = ivec4ToVec4(uf_uniformRegisterPS[3]);
+//passPixelColor4 = vec4( 0.0, 1.0, 1.0, 1.0 );
+passPixelColor4 = ivec4ToVec4(uf_uniformRegisterPS[4]);
+//passPixelColor5 = vec4( 1.0, 0, 1.0, 1.0 );
+passPixelColor5 = ivec4ToVec4(uf_uniformRegisterPS[5]);
 passPixelColor6 = vec4 (intBitsToFloat(R13i.x), intBitsToFloat(R13i.y), intBitsToFloat(R13i.z), intBitsToFloat(R13i.w) );
-passPixelColor6 = vec4( 1.0, 1.0, 1.0, 1.0 );
+passPixelColor7 = vec4( 1.0, 1.0, 1.0, 1.0 );
 //passPixelColor0 = vec4(intBitsToFloat(R7i.x), intBitsToFloat(R7i.y), intBitsToFloat(R7i.z), intBitsToFloat(R7i.w));
 //passPixelColor1 = vec4(intBitsToFloat(R8i.x), intBitsToFloat(R8i.y), intBitsToFloat(R8i.z), intBitsToFloat(R8i.w));
 //passPixelColor2 = vec4(intBitsToFloat(R9i.x), intBitsToFloat(R9i.y), intBitsToFloat(R9i.z), intBitsToFloat(R9i.w));
