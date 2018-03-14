@@ -2788,14 +2788,14 @@ R8i.w = R37i.w;
 // 0
 R7i.xyz = ivec3(R38i.x,R38i.y,R38i.z);
 R7i.w = R38i.w;
-// export 
+// export
 passPixelColor0 = vec4( 1, 0, 0.0, 1.0 );
 passPixelColor1 = vec4( 0.0, 1, 0.0, 1.0 );
 passPixelColor2 = vec4( 0, 0, 1.0, 1.0 );
 passPixelColor3 = vec4( 1.0, 1.0, 0.0, 1.0 );
 passPixelColor4 = vec4( 0.0, 1.0, 1.0, 1.0 );
 passPixelColor5 = vec4( 1.0, 0, 1.0, 1.0 );
-passPixelColor6 = vec4( 0.5, 0.5, 0.5, 1.0 );
+passPixelColor6 = vec4 (intBitsToFloat(R13i.x), intBitsToFloat(R13i.y), intBitsToFloat(R13i.z), intBitsToFloat(R13i.w) );
 passPixelColor6 = vec4( 1.0, 1.0, 1.0, 1.0 );
 //passPixelColor0 = vec4(intBitsToFloat(R7i.x), intBitsToFloat(R7i.y), intBitsToFloat(R7i.z), intBitsToFloat(R7i.w));
 //passPixelColor1 = vec4(intBitsToFloat(R8i.x), intBitsToFloat(R8i.y), intBitsToFloat(R8i.z), intBitsToFloat(R8i.w));
