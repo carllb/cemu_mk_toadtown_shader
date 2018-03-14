@@ -2789,7 +2789,8 @@ R8i.w = R37i.w;
 R7i.xyz = ivec3(R38i.x,R38i.y,R38i.z);
 R7i.w = R38i.w;
 // export
-passPixelColor0 = vec4( 1, 0, 0.0, 1.0 );
+ivec4 m_color = uf_uniformRegisterPS[0];
+passPixelColor0 = vec4(intBitsToFloat(m_color.x),intBitsToFloat(m_color.y),intBitsToFloat(m_color.z),intBitsToFloat(m_color.w));
 passPixelColor1 = vec4( 0.0, 1, 0.0, 1.0 );
 passPixelColor2 = vec4( 0, 0, 1.0, 1.0 );
 passPixelColor3 = vec4( 1.0, 1.0, 0.0, 1.0 );
