@@ -389,7 +389,7 @@ PS1i = R10i.w;
 R0i.z = PV1i.w;
 PS0i = floatBitsToInt(1.0 / abs(intBitsToFloat(PV1i.z)));
 // 17
-R123i.x = floatBitsToInt((mul_nY¤"¿;ë    {¦IonIEEE(intBitsToFloat(R124i.x),intBitsToFloat(PS0i)) + 1.5));
+R123i.x = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R124i.x),intBitsToFloat(PS0i)) + 1.5));
 PV1i.x = R123i.x;
 R5i.y = R7i.y;
 R5i.z = floatBitsToInt(roundEven(1.0));
