@@ -1,0 +1,199 @@
+#version 420
+#extension GL_ARB_texture_gather : enable
+#extension GL_ARB_separate_shader_objects : enable
+// shader 16bd96b755843849
+uniform ivec4 uf_remappedPS[3];
+layout(binding = 6) uniform sampler2D textureUnitPS6;// Tex6 addr 0x167fc000 res 512x512x1 dim 1 tm: 4 format 0034 compSel: 0 0 0 0 mipView: 0x0 (num 0xa) sliceView: 0x0 (num 0x1) Sampler6 ClampX/Y/Z: 0 0 0 border: 0
+layout(binding = 7) uniform sampler2D textureUnitPS7;// Tex7 addr 0x16828000 res 1024x1024x1 dim 1 tm: 4 format 0031 compSel: 0 1 2 3 mipView: 0x0 (num 0xb) sliceView: 0x0 (num 0x1) Sampler7 ClampX/Y/Z: 0 0 0 border: 0
+layout(binding = 8) uniform sampler2D textureUnitPS8;// Tex8 addr 0x1672d000 res 512x512x1 dim 1 tm: 4 format 0031 compSel: 0 1 2 3 mipView: 0x0 (num 0xa) sliceView: 0x0 (num 0x1) Sampler8 ClampX/Y/Z: 0 0 0 border: 0
+layout(location = 0) in vec4 passParameterSem0;
+layout(location = 1) in vec4 passParameterSem1;
+layout(location = 2) in vec4 passParameterSem2;
+layout(location = 3) in vec4 passParameterSem3;
+layout(location = 4) in vec4 passParameterSem254;
+layout(location = 1) out vec4 passPixelColor1;
+uniform vec2 uf_fragCoordScale;
+int clampFI32(int v)
+{
+if( v == 0x7FFFFFFF )
+	return floatBitsToInt(1.0);
+else if( v == 0xFFFFFFFF )
+	return floatBitsToInt(0.0);
+return floatBitsToInt(clamp(intBitsToFloat(v), 0.0, 1.0));
+}
+float mul_nonIEEE(float a, float b){ if( a == 0.0 || b == 0.0 ) return 0.0; return a*b; }
+void main()
+{
+ivec4 R0i = ivec4(0);
+ivec4 R1i = ivec4(0);
+ivec4 R2i = ivec4(0);
+ivec4 R3i = ivec4(0);
+ivec4 R4i = ivec4(0);
+ivec4 R122i = ivec4(0);
+ivec4 R123i = ivec4(0);
+ivec4 R124i = ivec4(0);
+ivec4 R125i = ivec4(0);
+ivec4 R126i = ivec4(0);
+ivec4 R127i = ivec4(0);
+int backupReg0i, backupReg1i, backupReg2i, backupReg3i, backupReg4i;
+ivec4 PV0i = ivec4(0), PV1i = ivec4(0);
+int PS0i = 0, PS1i = 0;
+ivec4 tempi = ivec4(0);
+float tempResultf;
+int tempResulti;
+ivec4 ARi = ivec4(0);
+bool predResult = true;
+vec3 cubeMapSTM;
+int cubeMapFaceId;
+R0i = floatBitsToInt(passParameterSem0);
+R1i = floatBitsToInt(passParameterSem1);
+R2i = floatBitsToInt(passParameterSem2);
+R3i = floatBitsToInt(passParameterSem3);
+R4i = floatBitsToInt(passParameterSem254);
+R4i.xy = floatBitsToInt(texture(textureUnitPS6, intBitsToFloat(R3i.zw)).xy);
+R0i.xy = floatBitsToInt(texture(textureUnitPS8, intBitsToFloat(R0i.xy)).xy);
+// 0
+backupReg0i = R3i.x;
+backupReg1i = R3i.y;
+R3i.x = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R4i.x),intBitsToFloat(uf_remappedPS[0].x)) + intBitsToFloat(backupReg0i)));
+R3i.y = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R4i.y),intBitsToFloat(uf_remappedPS[0].y)) + intBitsToFloat(backupReg1i)));
+R3i.z = floatBitsToInt((intBitsToFloat(R0i.x) * intBitsToFloat(0x40008102) + -(intBitsToFloat(0x3f810204))));
+R3i.w = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.z), intBitsToFloat(R2i.y)));
+R4i.x = floatBitsToInt(-(intBitsToFloat(uf_remappedPS[1].w)) + 1.0);
+PS0i = R4i.x;
+R3i.xy = floatBitsToInt(texture(textureUnitPS7, intBitsToFloat(R3i.xy)).xy);
+// 0
+R127i.x = floatBitsToInt((intBitsToFloat(R3i.y) * intBitsToFloat(0x40008102) + -(intBitsToFloat(0x3f810204))));
+R127i.y = floatBitsToInt((intBitsToFloat(R3i.x) * intBitsToFloat(0x40008102) + -(intBitsToFloat(0x3f810204))));
+PV0i.y = R127i.y;
+PV0i.z = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.x), intBitsToFloat(R2i.z)));
+PV0i.w = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.y), intBitsToFloat(R2i.x)));
+R127i.w = floatBitsToInt((intBitsToFloat(R0i.y) * intBitsToFloat(0x40008102) + -(intBitsToFloat(0x3f810204))));
+PS0i = R127i.w;
+// 1
+PV1i.x = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R3i.z), intBitsToFloat(R3i.z)));
+R123i.y = floatBitsToInt((mul_nonIEEE(-(intBitsToFloat(R1i.z)),intBitsToFloat(R2i.x)) + intBitsToFloat(PV0i.z)));
+PV1i.y = R123i.y;
+PV1i.z = floatBitsToInt(mul_nonIEEE(intBitsToFloat(PV0i.y), intBitsToFloat(PV0i.y)));
+R123i.w = floatBitsToInt((mul_nonIEEE(-(intBitsToFloat(R1i.y)),intBitsToFloat(R2i.z)) + intBitsToFloat(R3i.w)));
+PV1i.w = R123i.w;
+R122i.x = floatBitsToInt((mul_nonIEEE(-(intBitsToFloat(R1i.x)),intBitsToFloat(R2i.y)) + intBitsToFloat(PV0i.w)));
+PS1i = R122i.x;
+// 2
+R126i.x = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.w), intBitsToFloat(PV1i.w)));
+R123i.y = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R127i.w),intBitsToFloat(R127i.w)) + intBitsToFloat(PV1i.x)));
+PV0i.y = R123i.y;
+R127i.z = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.w), intBitsToFloat(PV1i.y)));
+R123i.w = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R127i.x),intBitsToFloat(R127i.x)) + intBitsToFloat(PV1i.z)));
+PV0i.w = R123i.w;
+R126i.z = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.w), intBitsToFloat(PS1i)));
+PS0i = R126i.z;
+// 3
+PV1i.x = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.x), intBitsToFloat(R127i.y)));
+PV1i.y = floatBitsToInt(-(intBitsToFloat(PV0i.w)) + 1.0);
+PV1i.y = clampFI32(PV1i.y);
+PV1i.z = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.y), intBitsToFloat(R127i.y)));
+PV1i.w = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.z), intBitsToFloat(R127i.y)));
+R125i.x = floatBitsToInt(-(intBitsToFloat(PV0i.y)) + 1.0);
+R125i.x = clampFI32(R125i.x);
+PS1i = R125i.x;
+// 4
+PV0i.x = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.x), intBitsToFloat(R3i.z)));
+R127i.y = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R127i.x),intBitsToFloat(R127i.z)) + intBitsToFloat(PV1i.z)));
+R123i.z = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R127i.x),intBitsToFloat(R126i.x)) + intBitsToFloat(PV1i.x)));
+PV0i.z = R123i.z;
+R126i.w = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R127i.x),intBitsToFloat(R126i.z)) + intBitsToFloat(PV1i.w)));
+R125i.z = floatBitsToInt(sqrt(intBitsToFloat(PV1i.y)));
+PS0i = R125i.z;
+// 5
+R123i.x = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R127i.w),intBitsToFloat(R126i.x)) + intBitsToFloat(PV0i.x)));
+PV1i.x = R123i.x;
+PV1i.y = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.z), intBitsToFloat(R3i.z)));
+PV1i.z = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R1i.y), intBitsToFloat(R3i.z)));
+R124i.w = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R2i.x),intBitsToFloat(PS0i)) + intBitsToFloat(PV0i.z)));
+R125i.w = floatBitsToInt(sqrt(intBitsToFloat(R125i.x)));
+PS1i = R125i.w;
+// 6
+backupReg0i = R127i.y;
+R126i.x = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R2i.x),intBitsToFloat(PS1i)) + intBitsToFloat(PV1i.x)));
+R127i.y = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R2i.y),intBitsToFloat(R125i.z)) + intBitsToFloat(backupReg0i)));
+R123i.z = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R127i.w),intBitsToFloat(R126i.z)) + intBitsToFloat(PV1i.y)));
+PV0i.z = R123i.z;
+R123i.w = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R127i.w),intBitsToFloat(R127i.z)) + intBitsToFloat(PV1i.z)));
+PV0i.w = R123i.w;
+R127i.w = floatBitsToInt((intBitsToFloat(R4i.w) > 0.0)?1.0:0.0);
+PS0i = R127i.w;
+// 7
+backupReg0i = R125i.z;
+R125i.x = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R2i.z),intBitsToFloat(R125i.w)) + intBitsToFloat(PV0i.z)));
+R126i.y = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R2i.y),intBitsToFloat(R125i.w)) + intBitsToFloat(PV0i.w)));
+R125i.z = floatBitsToInt((mul_nonIEEE(intBitsToFloat(R2i.z),intBitsToFloat(backupReg0i)) + intBitsToFloat(R126i.w)));
+PV1i.z = R125i.z;
+PV1i.w = floatBitsToInt((0.0 > intBitsToFloat(R4i.w))?1.0:0.0);
+R2i.w = uf_remappedPS[2].x;
+PS1i = R2i.w;
+// 8
+backupReg0i = R127i.w;
+tempi.x = floatBitsToInt(dot(vec4(intBitsToFloat(R124i.w),intBitsToFloat(R127i.y),intBitsToFloat(PV1i.z),-0.0),vec4(intBitsToFloat(R124i.w),intBitsToFloat(R127i.y),intBitsToFloat(PV1i.z),0.0)));
+PV0i.x = tempi.x;
+PV0i.y = tempi.x;
+PV0i.z = tempi.x;
+PV0i.w = tempi.x;
+R127i.w = floatBitsToInt(intBitsToFloat(backupReg0i) + -(intBitsToFloat(PV1i.w)));
+R127i.w = clampFI32(R127i.w);
+PS0i = R127i.w;
+// 9
+tempi.x = floatBitsToInt(dot(vec4(intBitsToFloat(R126i.x),intBitsToFloat(R126i.y),intBitsToFloat(R125i.x),-0.0),vec4(intBitsToFloat(R126i.x),intBitsToFloat(R126i.y),intBitsToFloat(R125i.x),0.0)));
+PV1i.x = tempi.x;
+PV1i.y = tempi.x;
+PV1i.z = tempi.x;
+PV1i.w = tempi.x;
+tempResultf = 1.0 / sqrt(intBitsToFloat(PV0i.x));
+PS1i = floatBitsToInt(tempResultf);
+// 10
+backupReg0i = R127i.w;
+R127i.x = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R125i.z), intBitsToFloat(PS1i)));
+PV0i.y = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R127i.y), intBitsToFloat(PS1i)));
+PV0i.z = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R124i.w), intBitsToFloat(PS1i)));
+R127i.w = ((intBitsToFloat(backupReg0i) != 0.0)?int(0xFFFFFFFF):int(0x0));
+tempResultf = 1.0 / sqrt(intBitsToFloat(PV1i.x));
+PS0i = floatBitsToInt(tempResultf);
+// 11
+backupReg0i = R126i.y;
+PV1i.x = floatBitsToInt(mul_nonIEEE(intBitsToFloat(PV0i.z), intBitsToFloat(R4i.x)));
+R126i.y = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R125i.x), intBitsToFloat(PS0i)));
+PV1i.z = floatBitsToInt(mul_nonIEEE(intBitsToFloat(backupReg0i), intBitsToFloat(PS0i)));
+PV1i.w = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R126i.x), intBitsToFloat(PS0i)));
+PS1i = floatBitsToInt(mul_nonIEEE(intBitsToFloat(PV0i.y), intBitsToFloat(R4i.x)));
+// 12
+backupReg0i = R127i.x;
+R127i.x = floatBitsToInt((mul_nonIEEE(intBitsToFloat(uf_remappedPS[1].w),intBitsToFloat(PV1i.w)) + intBitsToFloat(PV1i.x)));
+R127i.y = floatBitsToInt((mul_nonIEEE(intBitsToFloat(uf_remappedPS[1].w),intBitsToFloat(PV1i.z)) + intBitsToFloat(PS1i)));
+R123i.z = ((R127i.w == 0)?(0):(0x3f800000));
+PV0i.z = R123i.z;
+PV0i.w = floatBitsToInt(mul_nonIEEE(intBitsToFloat(backupReg0i), intBitsToFloat(R4i.x)));
+// 13
+R126i.x = floatBitsToInt((intBitsToFloat(PV0i.z) * 2.0 + -(1.0)));
+R125i.z = floatBitsToInt((mul_nonIEEE(intBitsToFloat(uf_remappedPS[1].w),intBitsToFloat(R126i.y)) + intBitsToFloat(PV0i.w)));
+PV1i.z = R125i.z;
+// 14
+tempi.x = floatBitsToInt(dot(vec4(intBitsToFloat(R127i.x),intBitsToFloat(R127i.y),intBitsToFloat(PV1i.z),-0.0),vec4(intBitsToFloat(R127i.x),intBitsToFloat(R127i.y),intBitsToFloat(PV1i.z),0.0)));
+PV0i.x = tempi.x;
+PV0i.y = tempi.x;
+PV0i.z = tempi.x;
+PV0i.w = tempi.x;
+// 15
+tempResultf = 1.0 / sqrt(intBitsToFloat(PV0i.x));
+PS1i = floatBitsToInt(tempResultf);
+PS1i = floatBitsToInt(intBitsToFloat(PS1i) / 2.0);
+// 16
+PV0i.y = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R125i.z), intBitsToFloat(PS1i)));
+PV0i.z = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R127i.y), intBitsToFloat(PS1i)));
+PV0i.w = floatBitsToInt(mul_nonIEEE(intBitsToFloat(R127i.x), intBitsToFloat(PS1i)));
+// 17
+R2i.x = floatBitsToInt((mul_nonIEEE(intBitsToFloat(PV0i.w),intBitsToFloat(R126i.x)) + 0.5));
+R2i.y = floatBitsToInt((mul_nonIEEE(intBitsToFloat(PV0i.z),intBitsToFloat(R126i.x)) + 0.5));
+R2i.z = floatBitsToInt((mul_nonIEEE(intBitsToFloat(PV0i.y),intBitsToFloat(R126i.x)) + 0.5));
+// export
+passPixelColor1 = vec4(intBitsToFloat(R2i.x), intBitsToFloat(R2i.y), intBitsToFloat(R2i.z), intBitsToFloat(R2i.w));
+}

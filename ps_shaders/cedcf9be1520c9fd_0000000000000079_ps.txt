@@ -1,0 +1,89 @@
+#version 420
+#extension GL_ARB_texture_gather : enable
+#extension GL_ARB_separate_shader_objects : enable
+// shader cedcf9be1520c9fd
+uniform ivec4 uf_remappedPS[2];
+layout(binding = 0) uniform sampler2D textureUnitPS0;// Tex0 addr 0xf4240800 res 1280x720x1 dim 1 tm: 4 format 0816 compSel: 0 1 2 5 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler0 ClampX/Y/Z: 2 2 2 border: 1
+layout(location = 0) in vec4 passParameterSem0;
+layout(location = 1) in vec4 passParameterSem1;
+layout(location = 0) out vec4 passPixelColor0;
+uniform vec2 uf_fragCoordScale;
+int clampFI32(int v)
+{
+if( v == 0x7FFFFFFF )
+	return floatBitsToInt(1.0);
+else if( v == 0xFFFFFFFF )
+	return floatBitsToInt(0.0);
+return floatBitsToInt(clamp(intBitsToFloat(v), 0.0, 1.0));
+}
+float mul_nonIEEE(float a, float b){ if( a == 0.0 || b == 0.0 ) return 0.0; return a*b; }
+void main()
+{
+vec4 R0f = vec4(0.0);
+vec4 R1f = vec4(0.0);
+vec4 R2f = vec4(0.0);
+vec4 R3f = vec4(0.0);
+vec4 R123f = vec4(0.0);
+vec4 R127f = vec4(0.0);
+float backupReg0f, backupReg1f, backupReg2f, backupReg3f, backupReg4f;
+vec4 PV0f = vec4(0.0), PV1f = vec4(0.0);
+float PS0f = 0.0, PS1f = 0.0;
+vec4 tempf = vec4(0.0);
+float tempResultf;
+int tempResulti;
+ivec4 ARi = ivec4(0);
+bool predResult = true;
+vec3 cubeMapSTM;
+int cubeMapFaceId;
+R0f = passParameterSem0;
+R1f = passParameterSem1;
+R2f.xyzw = (texture(textureUnitPS0, R0f.xy).xyzw);
+R0f.xyzw = (texture(textureUnitPS0, R0f.zw).xyzw);
+R3f.xyzw = (texture(textureUnitPS0, R1f.xy).xyzw);
+R1f.xyzw = (texture(textureUnitPS0, R1f.zw).xyzw);
+// 0
+backupReg0f = R0f.x;
+backupReg1f = R0f.z;
+PV0f.x = R2f.y + R0f.y;
+PV0f.x /= 2.0;
+PV0f.y = R2f.x + backupReg0f;
+PV0f.y /= 2.0;
+PV0f.z = R2f.w + R0f.w;
+PV0f.z /= 2.0;
+PV0f.w = R2f.z + backupReg1f;
+PV0f.w /= 2.0;
+// 1
+R123f.x = (R3f.y * 0.5 + PV0f.x);
+PV1f.x = R123f.x;
+R123f.y = (R3f.x * 0.5 + PV0f.y);
+PV1f.y = R123f.y;
+R123f.z = (R3f.w * 0.5 + PV0f.z);
+PV1f.z = R123f.z;
+R123f.w = (R3f.z * 0.5 + PV0f.w);
+PV1f.w = R123f.w;
+// 2
+R127f.x = (R1f.x * 0.5 + PV1f.y)/2.0;
+PV0f.x = R127f.x;
+R127f.y = (R1f.y * 0.5 + PV1f.x)/2.0;
+PV0f.y = R127f.y;
+R127f.z = (R1f.z * 0.5 + PV1f.w)/2.0;
+PV0f.z = R127f.z;
+R127f.w = (R1f.w * 0.5 + PV1f.z)/2.0;
+PV0f.w = R127f.w;
+// 3
+tempf.x = dot(vec4(PV0f.x,PV0f.y,PV0f.z,PV0f.w),vec4(intBitsToFloat(uf_remappedPS[0].x),intBitsToFloat(uf_remappedPS[0].y),intBitsToFloat(uf_remappedPS[0].z),intBitsToFloat(uf_remappedPS[0].w)));
+tempf.x = clamp(tempf.x, 0.0, 1.0);
+PV1f.x = tempf.x;
+PV1f.y = tempf.x;
+PV1f.z = tempf.x;
+PV1f.w = tempf.x;
+// 4
+PV0f.x = mul_nonIEEE(PV1f.x, intBitsToFloat(uf_remappedPS[1].z));
+// 5
+R1f.x = mul_nonIEEE(R127f.x, PV0f.x);
+R1f.y = mul_nonIEEE(R127f.y, PV0f.x);
+R1f.z = mul_nonIEEE(R127f.z, PV0f.x);
+R1f.w = mul_nonIEEE(R127f.w, PV0f.x);
+// export
+passPixelColor0 = vec4(R1f.x, R1f.y, R1f.z, R1f.w);
+}

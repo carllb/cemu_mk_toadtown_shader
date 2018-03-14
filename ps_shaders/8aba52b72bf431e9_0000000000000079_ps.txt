@@ -1,0 +1,174 @@
+#version 420
+#extension GL_ARB_texture_gather : enable
+#extension GL_ARB_separate_shader_objects : enable
+// shader 8aba52b72bf431e9
+layout(binding = 0) uniform sampler2D textureUnitPS0;// Tex0 addr 0x304d7800 res 960x540x1 dim 1 tm: 4 format 0019 compSel: 0 1 2 5 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler0 ClampX/Y/Z: 2 2 2 border: 1
+layout(location = 0) in vec4 passParameterSem4;
+layout(location = 1) in vec4 passParameterSem6;
+layout(location = 0) out vec4 passPixelColor0;
+uniform vec2 uf_fragCoordScale;
+int clampFI32(int v)
+{
+if( v == 0x7FFFFFFF )
+	return floatBitsToInt(1.0);
+else if( v == 0xFFFFFFFF )
+	return floatBitsToInt(0.0);
+return floatBitsToInt(clamp(intBitsToFloat(v), 0.0, 1.0));
+}
+float mul_nonIEEE(float a, float b){ if( a == 0.0 || b == 0.0 ) return 0.0; return a*b; }
+void main()
+{
+vec4 R0f = vec4(0.0);
+vec4 R1f = vec4(0.0);
+vec4 R2f = vec4(0.0);
+vec4 R3f = vec4(0.0);
+vec4 R4f = vec4(0.0);
+vec4 R5f = vec4(0.0);
+vec4 R6f = vec4(0.0);
+vec4 R7f = vec4(0.0);
+vec4 R8f = vec4(0.0);
+vec4 R9f = vec4(0.0);
+vec4 R10f = vec4(0.0);
+vec4 R11f = vec4(0.0);
+vec4 R12f = vec4(0.0);
+vec4 R127f = vec4(0.0);
+float backupReg0f, backupReg1f, backupReg2f, backupReg3f, backupReg4f;
+vec4 PV0f = vec4(0.0), PV1f = vec4(0.0);
+float PS0f = 0.0, PS1f = 0.0;
+vec4 tempf = vec4(0.0);
+float tempResultf;
+int tempResulti;
+ivec4 ARi = ivec4(0);
+bool predResult = true;
+vec3 cubeMapSTM;
+int cubeMapFaceId;
+R0f = passParameterSem4;
+R1f = passParameterSem6;
+R5f.xyzw = (texture(textureUnitPS0, R0f.xy).xyzw);
+R3f.xyzw = (texture(textureUnitPS0, R0f.zy).xyzw);
+R2f.xyzw = (texture(textureUnitPS0, R0f.xw).xyzw);
+R4f.xyzw = (texture(textureUnitPS0, R0f.zw).xyzw);
+// 0
+backupReg0f = R0f.z;
+PV0f.x = R2f.w + R3f.w;
+PV0f.y = R2f.z + R3f.z;
+PV0f.z = R2f.y + R3f.y;
+PV0f.w = R2f.x + R3f.x;
+R11f.x = backupReg0f;
+PS0f = R11f.x;
+// 1
+R8f.x = R4f.w + PV0f.x;
+R8f.y = R4f.z + PV0f.y;
+R3f.z = R4f.y + PV0f.z;
+R3f.w = R4f.x + PV0f.w;
+R3f.x = R1f.z;
+PS1f = R3f.x;
+// 2
+R4f.x = R1f.x;
+R3f.y = R0f.y;
+R11f.z = R1f.y;
+R11f.w = R1f.w;
+R4f.y = R0f.y;
+PS0f = R4f.y;
+R4f.xyzw = (texture(textureUnitPS0, R4f.xy).xyzw);
+R2f.xyzw = (texture(textureUnitPS0, R3f.xy).xyzw);
+R7f.xyzw = (texture(textureUnitPS0, R1f.xy).xyzw);
+R12f.xyzw = (texture(textureUnitPS0, R11f.xz).xyzw);
+// 0
+backupReg0f = R0f.w;
+PV0f.x = R5f.w + R4f.w;
+PV0f.y = R5f.x + R4f.x;
+PV0f.z = R5f.z + R4f.z;
+PV0f.w = R5f.y + R4f.y;
+R3f.y = backupReg0f;
+PS0f = R3f.y;
+// 1
+backupReg0f = R2f.w;
+R4f.x = PV0f.z + R2f.z;
+R4f.y = PV0f.w + R2f.y;
+R2f.z = PV0f.y + R2f.x;
+R2f.w = PV0f.x + backupReg0f;
+R0f.y = R1f.y;
+PS1f = R0f.y;
+// 2
+R2f.x = R1f.x;
+R2f.y = R0f.w;
+R10f.z = R0f.x;
+R10f.y = R1f.w;
+PS0f = R10f.y;
+R5f.xyzw = (texture(textureUnitPS0, R2f.xy).xyzw);
+R6f.xyzw = (texture(textureUnitPS0, R3f.xy).xyzw);
+R9f.xyzw = (texture(textureUnitPS0, R0f.xy).xyzw);
+R0f.xyzw = (texture(textureUnitPS0, R1f.zy).xyzw);
+// 0
+PV0f.x = R4f.y + R5f.y;
+PV0f.y = R2f.w + R5f.w;
+PV0f.z = R2f.z + R5f.x;
+PV0f.w = R4f.x + R5f.z;
+R2f.w = R9f.x + R3f.w;
+PS0f = R2f.w;
+// 1
+backupReg0f = R3f.z;
+PV1f.x = PV0f.x + R6f.y;
+PV1f.y = PV0f.z + R6f.x;
+PV1f.z = PV0f.y + R6f.w;
+PV1f.w = PV0f.w + R6f.z;
+R3f.z = R9f.y + backupReg0f;
+PS1f = R3f.z;
+// 2
+PV0f.x = PV1f.y + R7f.x;
+PV0f.y = PV1f.x + R7f.y;
+PV0f.z = PV1f.z + R7f.w;
+PV0f.w = PV1f.w + R7f.z;
+R7f.y = R9f.z + R8f.y;
+PS0f = R7f.y;
+// 3
+backupReg0f = R0f.x;
+backupReg1f = R0f.z;
+backupReg2f = R0f.y;
+backupReg3f = R8f.x;
+R0f.xyz = vec3(PV0f.x,PV0f.z,PV0f.w) + vec3(backupReg0f,R0f.w,backupReg1f);
+R0f.w = PV0f.y + backupReg2f;
+R8f.x = R9f.w + backupReg3f;
+PS1f = R8f.x;
+R9f.xyzw = (texture(textureUnitPS0, R10f.zy).xyzw);
+R10f.xyzw = (texture(textureUnitPS0, R1f.xw).xyzw);
+R11f.xyzw = (texture(textureUnitPS0, R11f.xw).xyzw);
+R1f.xyzw = (texture(textureUnitPS0, R1f.zw).xyzw);
+// 0
+R127f.xyz = vec3(R0f.y,R0f.x,R0f.z) + vec3(R10f.w,R10f.x,R10f.z);
+R127f.w = R0f.w + R10f.y;
+PS0f = R12f.x + R2f.w;
+// 1
+PV1f.x = R12f.w + R8f.x;
+PV1f.y = R12f.z + R7f.y;
+PV1f.z = R12f.y + R3f.z;
+PV1f.w = R9f.x + PS0f;
+// 2
+PV0f.x = R9f.w + PV1f.x;
+PV0f.y = R9f.z + PV1f.y;
+PV0f.z = R9f.y + PV1f.z;
+PV0f.w = R11f.x + PV1f.w;
+// 3
+PV1f.x = R11f.w + PV0f.x;
+PV1f.y = R11f.z + PV0f.y;
+PV1f.z = R11f.y + PV0f.z;
+PV1f.w = R1f.x + PV0f.w;
+// 4
+PV0f.x = R1f.w + PV1f.x;
+PV0f.y = R1f.z + PV1f.y;
+PV0f.z = R1f.y + PV1f.z;
+PV0f.w = R127f.y + PV1f.w;
+// 5
+PV1f.x = R127f.x + PV0f.x;
+PV1f.y = R127f.z + PV0f.y;
+PV1f.z = R127f.w + PV0f.z;
+R1f.x = PV0f.w * intBitsToFloat(0x3d800000);
+PS1f = R1f.x;
+// 6
+R1f.y = PV1f.z * intBitsToFloat(0x3d800000);
+R1f.z = PV1f.y * intBitsToFloat(0x3d800000);
+R1f.w = PV1f.x * intBitsToFloat(0x3d800000);
+// export
+passPixelColor0 = vec4(R1f.x, R1f.y, R1f.z, R1f.w);
+}
