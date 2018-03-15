@@ -27,15 +27,15 @@ layout(location = 7) in vec4 passParameterSem7;
 // shader 66513c4be5245804
 // Toad Harbor
 uniform ivec4 uf_uniformRegisterPS[256];
-layout(location = 0) in vec4 passParameterSem0;
-layout(location = 0) out vec4 passPixelColor0;
-layout(location = 1) out vec4 passPixelColor1;
-layout(location = 2) out vec4 passPixelColor2;
-layout(location = 3) out vec4 passPixelColor3;
-layout(location = 4) out vec4 passPixelColor4;
-layout(location = 5) out vec4 passPixelColor5;
-layout(location = 6) out vec4 passPixelColor6;
-layout(location = 7) out vec4 passPixelColor7;
+layout(location = 8) in vec4 passParameterSem0;
+layout(location = 9) out vec4 passPixelColor0;
+layout(location = 10) out vec4 passPixelColor1;
+layout(location = 11) out vec4 passPixelColor2;
+layout(location = 12) out vec4 passPixelColor3;
+layout(location = 13) out vec4 passPixelColor4;
+layout(location = 14) out vec4 passPixelColor5;
+layout(location = 15) out vec4 passPixelColor6;
+layout(location = 16) out vec4 passPixelColor7;
 uniform vec2 uf_fragCoordScale;
 
 vec4 ivec4ToVec4(ivec4 invec){
