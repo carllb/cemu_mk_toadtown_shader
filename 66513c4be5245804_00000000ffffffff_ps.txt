@@ -69,9 +69,9 @@ ivec4 R7i = floatBitsToInt(passParameterSem7);
 
 
 ivec4 m_color = uf_uniformRegisterPS[0];
-passPixelColor0 = texture(textureUnitPS0, intBitsToFloat(R0i.xy),0.0);
+passPixelColor0 = textureLod(textureUnitPS0, intBitsToFloat(R0i.xyzw),0.0);
 //passPixelColor1 = vec4( 0.0, 1, 0.0, 1.0 );
-passPixelColor1 = texture(textureUnitPS1, intBitsToFloat(R1i.xy),0.0);
+passPixelColor1 = textureLod(textureUnitPS1, intBitsToFloat(R1i.xyzw),0.0);
 //passPixelColor2 = vec4( 0, 0, 1.0, 1.0 );
 passPixelColor2 = texture(textureUnitPS2, intBitsToFloat(R2i.xy));
 //passPixelColor3 = vec4( 1.0, 1.0, 0.0, 1.0 );
