@@ -7,10 +7,10 @@
 
 layout(binding = 0) uniform samplerCubeArray textureUnitPS0;// Tex0 addr 0x42892000 res 128x128x8 dim 3 tm: 4 format 0033 compSel: 0 1 2 3 mipView: 0x0 (num 0x8) sliceView: 0x0 (num 0x30) Sampler0 ClampX/Y/Z: 2 2 2 border: 1
 layout(binding = 1) uniform samplerCubeArray textureUnitPS1;// Tex1 addr 0x3fa08800 res 32x32x1 dim 3 tm: 4 format 0816 compSel: 0 1 2 5 mipView: 0x0 (num 0x2) sliceView: 0x0 (num 0x6) Sampler1 ClampX/Y/Z: 2 2 2 border: 1
-layout(binding = 2) uniform sampler2D sampler2DArray;// Tex2 addr 0x30d05800 res 4x4x1 dim 5 tm: 2 format 001a compSel: 0 1 2 3 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler2 ClampX/Y/Z: 2 2 2 border: 1
+layout(binding = 2) uniform sampler2DArray textureUnitPS2;// Tex2 addr 0x30d05800 res 4x4x1 dim 5 tm: 2 format 001a compSel: 0 1 2 3 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler2 ClampX/Y/Z: 2 2 2 border: 1
 layout(binding = 3) uniform sampler2D textureUnitPS3;// Tex3 addr 0x30d03000 res 4x4x1 dim 1 tm: 2 format 001a compSel: 0 1 2 3 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler3 ClampX/Y/Z: 2 2 2 border: 1
 layout(binding = 4) uniform sampler2D textureUnitPS4;// Tex4 addr 0x1a8c0000 res 344x240x1 dim 1 tm: 4 format 0034 compSel: 0 4 4 4 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler4 ClampX/Y/Z: 2 2 2 border: 0
-layout(binding = 5) uniform sampler2D sampler2DArray;// Tex5 addr 0x1a5a6000 res 172x124x1 dim 5 tm: 4 format 0033 compSel: 0 1 2 3 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler5 ClampX/Y/Z: 2 2 2 border: 0
+layout(binding = 5) uniform sampler2DArray textureUnitPS5;// Tex5 addr 0x1a5a6000 res 172x124x1 dim 5 tm: 4 format 0033 compSel: 0 1 2 3 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler5 ClampX/Y/Z: 2 2 2 border: 0
 layout(binding = 6) uniform sampler2D textureUnitPS6;// Tex6 addr 0x1aa24000 res 2048x1024x1 dim 1 tm: 4 format 0431 compSel: 0 1 2 3 mipView: 0x0 (num 0xc) sliceView: 0x0 (num 0x1) Sampler6 ClampX/Y/Z: 0 0 2 border: 0
 layout(binding = 7) uniform sampler2D textureUnitPS7;// Tex7 addr 0x1a5ba000 res 2048x1024x1 dim 1 tm: 4 format 0235 compSel: 0 1 4 5 mipView: 0x0 (num 0xc) sliceView: 0x0 (num 0x1) Sampler7 ClampX/Y/Z: 0 0 2 border: 0
 layout(binding = 8) uniform sampler2D textureUnitPS8;// Tex8 addr 0x1ab7a000 res 1024x512x1 dim 1 tm: 4 format 0034 compSel: 0 0 0 5 mipView: 0x0 (num 0xb) sliceView: 0x0 (num 0x1) Sampler8 ClampX/Y/Z: 0 0 2 border: 0
