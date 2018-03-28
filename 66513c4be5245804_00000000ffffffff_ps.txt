@@ -1,0 +1,95 @@
+#version 420
+#extension GL_ARB_texture_gather : enable
+#extension GL_ARB_separate_shader_objects : enable
+
+// shader 66513c4be5245804
+// Toad Harbor
+
+layout(binding = 0) uniform samplerCubeArray textureUnitPS0;// Tex0 addr 0x42892000 res 128x128x8 dim 3 tm: 4 format 0033 compSel: 0 1 2 3 mipView: 0x0 (num 0x8) sliceView: 0x0 (num 0x30) Sampler0 ClampX/Y/Z: 2 2 2 border: 1
+layout(binding = 1) uniform samplerCubeArray textureUnitPS1;// Tex1 addr 0x3fa08800 res 32x32x1 dim 3 tm: 4 format 0816 compSel: 0 1 2 5 mipView: 0x0 (num 0x2) sliceView: 0x0 (num 0x6) Sampler1 ClampX/Y/Z: 2 2 2 border: 1
+layout(binding = 2) uniform sampler2DArray textureUnitPS2;// Tex2 addr 0x30d05800 res 4x4x1 dim 5 tm: 2 format 001a compSel: 0 1 2 3 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler2 ClampX/Y/Z: 2 2 2 border: 1
+layout(binding = 3) uniform sampler2D textureUnitPS3;// Tex3 addr 0x30d03000 res 4x4x1 dim 1 tm: 2 format 001a compSel: 0 1 2 3 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler3 ClampX/Y/Z: 2 2 2 border: 1
+layout(binding = 4) uniform sampler2D textureUnitPS4;// Tex4 addr 0x1a8c0000 res 344x240x1 dim 1 tm: 4 format 0034 compSel: 0 4 4 4 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler4 ClampX/Y/Z: 2 2 2 border: 0
+layout(binding = 5) uniform sampler2DArray textureUnitPS5;// Tex5 addr 0x1a5a6000 res 172x124x1 dim 5 tm: 4 format 0033 compSel: 0 1 2 3 mipView: 0x0 (num 0x1) sliceView: 0x0 (num 0x1) Sampler5 ClampX/Y/Z: 2 2 2 border: 0
+layout(binding = 6) uniform sampler2D textureUnitPS6;// Tex6 addr 0x1aa24000 res 2048x1024x1 dim 1 tm: 4 format 0431 compSel: 0 1 2 3 mipView: 0x0 (num 0xc) sliceView: 0x0 (num 0x1) Sampler6 ClampX/Y/Z: 0 0 2 border: 0
+layout(binding = 7) uniform sampler2D textureUnitPS7;// Tex7 addr 0x1a5ba000 res 2048x1024x1 dim 1 tm: 4 format 0235 compSel: 0 1 4 5 mipView: 0x0 (num 0xc) sliceView: 0x0 (num 0x1) Sampler7 ClampX/Y/Z: 0 0 2 border: 0
+layout(binding = 8) uniform sampler2D textureUnitPS8;// Tex8 addr 0x1ab7a000 res 1024x512x1 dim 1 tm: 4 format 0034 compSel: 0 0 0 5 mipView: 0x0 (num 0xb) sliceView: 0x0 (num 0x1) Sampler8 ClampX/Y/Z: 0 0 2 border: 0
+layout(binding = 9) uniform sampler2D textureUnitPS9;// Tex9 addr 0x1aa24000 res 2048x1024x1 dim 1 tm: 4 format 0431 compSel: 0 1 2 3 mipView: 0x0 (num 0xc) sliceView: 0x0 (num 0x1) Sampler9 ClampX/Y/Z: 0 0 2 border: 0
+
+layout(location = 0) in vec4 passParameterSem0;
+layout(location = 1) in vec4 passParameterSem1;
+layout(location = 2) in vec4 passParameterSem2;
+layout(location = 3) in vec4 passParameterSem3;
+layout(location = 4) in vec4 passParameterSem4;
+layout(location = 5) in vec4 passParameterSem5;
+layout(location = 6) in vec4 passParameterSem6;
+layout(location = 7) in vec4 passParameterSem7;
+
+uniform ivec4 uf_uniformRegisterPS[256];
+
+layout(location = 0) out vec4 passPixelColor0;
+layout(location = 1) out vec4 passPixelColor1;
+layout(location = 2) out vec4 passPixelColor2;
+layout(location = 3) out vec4 passPixelColor3;
+layout(location = 4) out vec4 passPixelColor4;
+layout(location = 5) out vec4 passPixelColor5;
+layout(location = 6) out vec4 passPixelColor6;
+layout(location = 7) out vec4 passPixelColor7;
+uniform vec2 uf_fragCoordScale;p
+
+vec4 ivec4ToVec4(ivec4 invec){
+	return vec4(intBitsToFloat(invec.x),intBitsToFloat(invec.y),intBitsToFloat(invec.z),intBitsToFloat(invec.w));
+}
+
+
+int clampFI32(int v)
+{
+if( v == 0x7FFFFFFF )
+	return floatBitsToInt(1.0);
+else if( v == 0xFFFFFFFF )
+	return floatBitsToInt(0.0);
+return floatBitsToInt(clamp(intBitsToFloat(v), 0.0, 1.0));
+}
+float mul_nonIEEE(float a, float b){ if( a == 0.0 || b == 0.0 ) return 0.0; return a*b; }
+void main()
+{
+// export
+
+ivec4 R0i = floatBitsToInt(passParameterSem0);
+ivec4 R1i = floatBitsToInt(passParameterSem1);
+ivec4 R2i = floatBitsToInt(passParameterSem2);
+ivec4 R3i = floatBitsToInt(passParameterSem3);
+ivec4 R4i = floatBitsToInt(passParameterSem4);
+ivec4 R5i = floatBitsToInt(passParameterSem5);
+ivec4 R6i = floatBitsToInt(passParameterSem6);
+ivec4 R7i = floatBitsToInt(passParameterSem7);
+
+
+
+
+
+ivec4 m_color = uf_uniformRegisterPS[0];
+passPixelColor0 = textureLod(textureUnitPS0, intBitsToFloat(R0i.xyzw),0.0);
+//passPixelColor1 = vec4( 0.0, 1, 0.0, 1.0 );
+passPixelColor1 = textureLod(textureUnitPS1, intBitsToFloat(R1i.xyzw),0.0);
+//passPixelColor2 = vec4( 0, 0, 1.0, 1.0 );
+passPixelColor2 = texture(textureUnitPS2, intBitsToFloat(R2i.xyz));
+//passPixelColor3 = vec4( 1.0, 1.0, 0.0, 1.0 );
+passPixelColor3 = texture(textureUnitPS3, intBitsToFloat(R3i.xy));
+//passPixelColor4 = vec4( 0.0, 1.0, 1.0, 1.0 );
+passPixelColor4 = texture(textureUnitPS4, intBitsToFloat(R4i.xy));
+//passPixelColor5 = vec4( 1.0, 0, 1.0, 1.0 );
+passPixelColor5 = texture(textureUnitPS5, intBitsToFloat(R5i.xyz));
+passPixelColor6 = texture(textureUnitPS6, intBitsToFloat(R6i.xy));
+//passPixelColor7 = vec4( 1.0, 0, 0, 1.0 );
+passPixelColor7 = texture(textureUnitPS7, intBitsToFloat(R7i.xy));
+
+//passPixelColor0 = vec4(intBitsToFloat(R7i.x), intBitsToFloat(R7i.y), intBitsToFloat(R7i.z), intBitsToFloat(R7i.w));
+//passPixelColor1 = vec4(intBitsToFloat(R8i.x), intBitsToFloat(R8i.y), intBitsToFloat(R8i.z), intBitsToFloat(R8i.w));
+//passPixelColor2 = vec4(intBitsToFloat(R9i.x), intBitsToFloat(R9i.y), intBitsToFloat(R9i.z), intBitsToFloat(R9i.w));
+//passPixelColor3 = vec4(intBitsToFloat(R10i.x), intBitsToFloat(R10i.y), intBitsToFloat(R10i.z), intBitsToFloat(R10i.w));
+//passPixelColor4 = vec4(intBitsToFloat(R11i.x), intBitsToFloat(R11i.y), intBitsToFloat(R11i.z), intBitsToFloat(R11i.w));
+//passPixelColor5 = vec4(intBitsToFloat(R12i.x), intBitsToFloat(R12i.y), intBitsToFloat(R12i.z), intBitsToFloat(R12i.w));
+//passPixelColor6 = vec4(intBitsToFloat(R13i.x), intBitsToFloat(R13i.y), intBitsToFloat(R13i.z), intBitsToFloat(R13i.w));
+//passPixelColor7 = vec4(intBitsToFloat(R14i.x), intBitsToFloat(R14i.y), intBitsToFloat(R14i.z), intBitsToFloat(R14i.w));
+}
